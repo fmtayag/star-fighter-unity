@@ -37,6 +37,10 @@ public class PlayerMove : MonoBehaviour
         {
             MoveDown();
         }
+        if (Input.GetKey(KeyCode.F1))
+        {
+
+        }
     }
 
     void MoveLeft()
@@ -68,4 +72,6 @@ public class PlayerMove : MonoBehaviour
     {
         transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
     }
+
+
 }

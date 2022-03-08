@@ -40,6 +40,9 @@ public class EBCollide : MonoBehaviour
             {
                 GameStats.Instance.Lives = 0;
             }
+
+            // Screen shake
+            Camera.main.GetComponent<CameraFollow>().AddScreenshakeTime(GameStats.Instance.RECOMMENDED_SHAKE_DURATION);
         }
     }
 }

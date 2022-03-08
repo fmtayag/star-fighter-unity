@@ -36,6 +36,7 @@ public class PBCollide : MonoBehaviour
 
             // Add score
             GameStats.Instance.Score += 1;
+
         }
     }
 }

@@ -8,14 +8,47 @@ public class CameraFollow : MonoBehaviour
     public GameObject player;
     public float speed = 2.0f;
 
+    private float shakeAlpha;
+    private float shakeTimeLeft;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        shakeAlpha = 15f;
+        shakeTimeLeft = 0f;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        FollowPlayer();
+        ScreenShake();
+    }
+
+    private void ScreenShake()
+    {
+        if (shakeTimeLeft > 0)
+        {
+            // Decrement time left
+            shakeTimeLeft -= Time.deltaTime;
+
+            // Produce screenshake
+            shakeAlpha = shakeAlpha * -1;
+            float interpolation = 5 * Time.deltaTime;
+            Vector3 position = this.transform.position;
+            position.y = this.transform.position.y;
+            position.x = Mathf.Lerp(this.transform.position.x, shakeAlpha, interpolation);
+            this.transform.position = position;
+        }
+    }
+
+    public void AddScreenshakeTime(float duration)
+    {
+        shakeTimeLeft += duration;
+    }
+
+    private void FollowPlayer()
     {
         float interpolation = speed * Time.deltaTime;
 
@@ -39,5 +72,6 @@ public class CameraFollow : MonoBehaviour
         position.y = Mathf.Clamp(position.y, minPosY, maxPosY);
 
         this.transform.position = position;
+
     }
 }
